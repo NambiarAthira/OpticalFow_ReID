@@ -1,0 +1,22 @@
+function num = which_camera(camera_str)
+%num = which_camera(camera_str)
+%returns a number corresponding to the camera number
+%ex: CameraA6-4 returns 464
+%em2: CAMERA8 returns 8
+num = 0;
+
+if isempty(strfind(camera_str,'Camera')) %means it's of type 'CAMERAX', LRM camera type
+    num = sscanf(camera_str,'CAMERA%d');
+elseif isempty(strfind(camera_str,'CAMERA')) %means it's of type 'CameraXY-Z', Barcelona campus camera type
+    if isempty(strfind(camera_str,'CameraA')) %its block B
+        nums = sscanf(camera_str,'CameraB%d-%d');
+        num = 8*100 + nums(1)*10 + nums(2)*1;
+    elseif isempty(strfind(camera_str,'CameraB')) %is block A
+        nums = sscanf(camera_str,'CameraA%d-%d');
+        num = 4*100 + nums(1)*10 + nums(2)*1;     
+    elseif
+        
+    end
+end
+
+end
